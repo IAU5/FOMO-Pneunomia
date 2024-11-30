@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY Fomo_based_CNN.ipynb ./model_code/
 COPY model.onnx ./model/
 
-# Set the entrypoint script
-COPY entrypoint.py .
+# Set the model script
+COPY model.py .
 
 # Set the default command to run the entrypoint script
 ENTRYPOINT ["python", "model.py"]
