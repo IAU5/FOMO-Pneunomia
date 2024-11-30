@@ -22,7 +22,7 @@ def run_inference(image_path, model_path="model.onnx"):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python model.py <path_to_image>")
+        print("Usage: python model.py test_28.jpg")
         sys.exit(1)
     image_path = sys.argv[1]
     probabilities, predicted_class = run_inference(image_path)
