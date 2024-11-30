@@ -22,4 +22,4 @@ COPY model.onnx ./model/
 COPY entrypoint.py .
 
 # Set the default command to run the entrypoint script
-ENTRYPOINT ["python", "entrypoint.py"]
+ENTRYPOINT ["python", "model.py"]
