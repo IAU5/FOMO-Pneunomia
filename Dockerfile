@@ -1,18 +1,25 @@
-# Use a lightweight Python image
-FROM python:3.9-slim
+# Base image with Python and necessary tools
+FROM python:3.8-slim
+
+# Set working directory
+WORKDIR /usr/src/app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Copy requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files to the Docker image
-COPY . /app
-WORKDIR /app
+# Copy the model code and ONNX file
+COPY Fomo_based_CNN.ipynb ./model_code/
+COPY model.onnx ./model/
 
-# Command to run your custom block
-CMD ["python", "main.py"]
+# Set the entrypoint script
+COPY entrypoint.py .
+
+# Set the default command to run the entrypoint script
+ENTRYPOINT ["python", "entrypoint.py"]
