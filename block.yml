@@ -1,0 +1,7 @@
+name: FOMO_ONNX_Block
+type: object-detection 
+description: Custom block using ONNX model exported from PyTorch
+parameters:
+  epochs: 10
+  learning_rate: 0.001
+  batch_size: 32
